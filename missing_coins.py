@@ -77,3 +77,18 @@ if input("Do you want statistics per country? (Y/N, 1/0): ") in ("Y", "y", "1"):
 if input("Do you want a list of missing coins? (Y/N, 1/0): ") in("Y", "y", "1"):
     for id in sorted(all_coin_ids.difference(owned_coin_ids)):
         print(coins[id])
+
+if input("Would you like to see missing coins by value? (Y/N, 1/0): ") in ("Y", "y", "1"):
+    value_temp = input("Which value are you interested in? (In cents or 'commemorative'/'cc'): ")
+    if value_temp in ("commemorative", "cc", "CC"):
+        for id in sorted(all_coin_ids.difference(owned_coin_ids)):
+            if coins[id][2] == "commemorative":
+                print(coins[id][1], coins[id][3])
+    else:
+        value_temp = int(value_temp)
+        for id in sorted(all_coin_ids.difference(owned_coin_ids)):
+            if coins[id][3] == value_temp:
+                if len(coins[id]) == 5:
+                    print(coins[id][2], coins[id][4])
+                else:
+                    print(coins[id][2])
